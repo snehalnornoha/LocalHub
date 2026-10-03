@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import  './Home.css'
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 
  const categories = [
     "Explore",
