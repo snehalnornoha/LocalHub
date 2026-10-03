@@ -5,6 +5,7 @@ import { Search, User, Bell, MapPin ,Home} from "lucide-react";
 import profile_dumy from './assets/profile.jpg'
 
 import './App.css'
+import Ahome from './content/Home';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,18 +32,15 @@ function App() {
 
       </div>
       <div className="main_content">
-        <h1>hi</h1>
+        <Routes>
+            <Route path="/" element={<Ahome/>} />
+           
+        </Routes>
         
 
       </div>
       <div className="right_sidebar">
-         <div className="small_profile">
-          <img src={profile_dumy} alt="profile img" />
-          <span>
-           <h3>Name</h3>
-           Business</span>
-          
-        </div>
+         
 
       </div>
 
