@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Bell, Search } from 'lucide-react';
 import  './Home.css'
 import { useState ,useEffect} from 'react';
 
@@ -17,9 +17,12 @@ function Ahome(props){
  
     return(
         <div className="home_parent">
+            <div className="header">
             <div className="search_bar">
                 <Search/>
                 <input type="text" placeholder=' Search' />
+            </div>
+            <Bell/>
             </div>
             <div className="catogory">
                {categories.map((cat,indx) =>
