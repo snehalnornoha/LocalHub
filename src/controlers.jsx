@@ -1,5 +1,8 @@
-const path = import.meta.env.OtherSide_path;
+const path = import.meta.env.VITE_OTHER_SIDE_PATH;
+
+
 export async function  getAPI(url,mthd = 'GET',isRefresh = true){
+    
     try{
         const res = await fetch(`${path}/${url}`,{
             method :mthd,
@@ -24,6 +27,7 @@ export async function  getAPI(url,mthd = 'GET',isRefresh = true){
     }
 }
 export async function  mthdAPI(url,mthd='POST',package_data,isRefresh = true){
+    console.log(path,url)
     try{
         const res = await fetch(`${path}/${url}`,{
             method: mthd,
@@ -50,6 +54,30 @@ export async function  mthdAPI(url,mthd='POST',package_data,isRefresh = true){
         console.log(error)
         return {success :false}
     }
+}
+
+export async function refresh_credentials(){
+   
+    console.log("sending request to srver for jwt")
+    try{
+        const res = await fetch(`${API_URL}/api/refresh_token`, {
+            credentials: "include"
+        })
+        if(res.ok){
+            const data = await res.json()
+            console.log(data)
+            return {success : true}
+        }
+        else{
+            throw new Error("error")
+        }
+
+    }
+  
+    catch(err) {
+            console.log(err)
+            alert("please login again to continue")}
+            return {success : false}        
 }
 
 

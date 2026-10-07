@@ -1,7 +1,7 @@
 import { Bell, Search } from 'lucide-react';
 import  './Home.css'
 import { useState ,useEffect} from 'react';
-
+import Post_cards from './Cards';
  const categories = [
     "Explore",
     "Jobs",
@@ -37,7 +37,8 @@ function Ahome(props){
 
             <div className="home_content">
 
-
+                <Post_cards></Post_cards>
+                <Post_cards></Post_cards>
 
                 
             </div>

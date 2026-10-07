@@ -299,6 +299,22 @@ textarea:focus-visible {
 
   overflow-y: auto;
 }
+.right_sidebar::-webkit-scrollbar,
+.menu_container::-webkit-scrollbar{
+  width: 5px;
+  background-color: #7a7777;
+  border-radius: 10px;
+}
+.right_sidebar::-webkit-scrollbar-thumb,
+.menu_container::-webkit-scrollbar-thumb{
+  width: 2px;
+  border-radius: 10px;
+  background-color: rgb(216, 213, 213);
+}
+.main_content::-webkit-scrollbar{
+  width: 0px;
+  background-color: white;
+}
 
 .info{
   display: none;
@@ -314,8 +330,9 @@ textarea:focus-visible {
   height: 100dvh;
 
   border-left: 2px solid var(--border-light);
+  padding: 10px;
 
-  overflow: hidden;
+  overflow: auto;
 }
 
 
