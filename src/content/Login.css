@@ -144,7 +144,14 @@ body {
     position: relative;
     z-index: 2;
 }
-
+.links_f{
+    font-size: 10px;
+}
+.links_f:active{
+    color: blue;
+    transform: scale(1.2);
+    transition: all 0.2s ease;
+}
 .toggle button {
     width: 50%;
     height: 34px;

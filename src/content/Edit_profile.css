@@ -1,96 +1,159 @@
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
 .edit-profile-page {
   min-height: 100vh;
   width: 100%;
-  padding: 45px 10px;
- 
-  border-radius: 10px;
-  margin: 10px;
-  background: #f5efe6;
-  color: #3b2a20;
-    box-sizing: border-box;
 
+  padding: 45px 10px;
+  margin: 10px;
+
+  box-sizing: border-box;
+
+  background: #0b0b0b;
+  box-shadow: inset 0px 0px 10px rgb(63, 63, 63), 0px 0px 10px rgb(63, 63, 63) ;
+  color: #ffffff;
+
+  border-radius: 10px;
 }
 
 
-/* --------------HEADER--------------*/
-
+/* =========================================================
+   HEADER
+========================================================= */
 
 .edit-profile-header {
   max-width: 1100px;
   margin: 0 auto 30px;
+  margin-left: 10px;
 }
 
 .page-breadcrumb {
   margin: 0 0 7px;
 
   font-size: 13px;
-  color: #9b806c;
+  color: #888888;
 }
 
 .edit-profile-header h1 {
   margin: 0;
-
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -0.7px;
 
-  color: #3b2a20;
+  color: #ffffff;
 }
 
 .edit-profile-header p:last-child {
   margin: 8px 0 0;
 
   font-size: 14px;
-  color: #8b7464;
+  color: #999999;
 }
 
+
+/* =========================================================
+   CHANGE IMAGE FORM
+========================================================= */
+
 .change-image-form {
-  width:200px;
+  width: 200px;
+
   margin-top: 10px;
+
+  padding: 10px;
+
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #fffaf2;
-  padding: 10px;
-  border: 1px solid rgba(224, 162, 69, 0.918);
-  box-shadow: 0px 0px 10px rgb(197, 146, 52) ;
+
+  box-sizing: border-box;
+
+  background: #111111;
+
+  border: 1px solid #333333;
   border-radius: 10px;
 
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
 }
-.change-image-form button{
-  width:100%;
-  background: #b6986d5f;
+
+.change-image-form button {
+  width: 100%;
+
   padding: 10px;
-  border: 1px solid transparent;
-  border-radius: 10px;
+
+  background: #1a1a1a;
+
+  border: 1px solid #333333;
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition: 0.2s;
 }
-.change-image-form button:active{
-  background-color: #41230b;
-  color: white;
-  transform:scale(0.9);
-  transition: all 0.5s ease;
+
+.change-image-form button:hover {
+  background: #252525;
+  border-color: #555555;
 }
-.change-image-form input{
+
+.change-image-form button:active {
+  background: #ffffff;
+  color: #000000;
+
+  transform: scale(0.96);
+}
+
+.change-image-form input {
+  width: 100%;
+
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 100%;
-  color: #8b7464;
 
+  box-sizing: border-box;
+
+  color: #cccccc;
 }
-.change-image-form h3{
-  border:1px solid #9b7a6488;
-  border-radius: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  box-shadow: inset 0px 0px 10px rgb(197, 146, 52) ;
+
+.change-image-form h3 {
+  padding: 10px 0;
+  margin: 0;
+
+  text-align: center;
+
+  color: #ffffff;
+
+  border: 1px solid #333333;
+  border-radius: 9px;
+
+  background: #151515;
+
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.03);
 }
-.change-image-form  .sndprofile{
-  background-color: #b9a58e;
+
+.change-image-form .sndprofile {
+  background: #ffffff;
+  color: #000000;
+
+  border-color: #ffffff;
 }
-/* -------------TOP SECTION---------- */
+
+.change-image-form .sndprofile:hover {
+  background: #dddddd;
+}
+
+
+/* =========================================================
+   TOP SECTION
+========================================================= */
 
 .profile-top-section {
   max-width: 1100px;
+
   margin: 0 auto 25px;
 
   display: grid;
@@ -101,7 +164,9 @@
 }
 
 
-/*-----------PROFILE CARD-------------------*/
+/* =========================================================
+   PROFILE CARD
+========================================================= */
 
 .profile-card {
   min-height: 190px;
@@ -110,21 +175,23 @@
 
   box-sizing: border-box;
 
-  background: #fffaf2;
-
-  border: 1px solid #e5d6c5;
-  border-radius: 18px;
-
   display: flex;
   align-items: center;
 
   gap: 20px;
 
-  box-shadow: 0 8px 30px rgba(91, 62, 42, 0.07);
+  background: #111111;
+
+  border: 1px solid #2d2d2d;
+  border-radius: 18px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 
-/* Profile image */
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
 
 .profile-image-wrapper {
   position: relative;
@@ -139,17 +206,23 @@
   width: 100%;
   height: 100%;
 
+  display: block;
+
   object-fit: cover;
 
-  display: block;
+  box-sizing: border-box;
 
   border-radius: 50%;
 
-  border: 4px solid #eadbc9;
+  border: 4px solid #333333;
+
+  background: #222222;
 }
 
 
-/* Change image */
+/* =========================================================
+   CHANGE IMAGE BUTTON
+========================================================= */
 
 .change-image-btn {
   position: absolute;
@@ -161,10 +234,11 @@
   height: 34px;
 
   border-radius: 50%;
-  border: 3px solid #fffaf2;
 
-  background: #6b4630;
-  color: #fffaf2;
+  border: 3px solid #111111;
+
+  background: #ffffff;
+  color: #000000;
 
   cursor: pointer;
 
@@ -175,14 +249,19 @@
 
 .change-image-btn:hover {
   transform: scale(1.08);
-  background: #543522;
+
+  background: #dddddd;
 }
 
 
-/* Profile information */
+/* =========================================================
+   PROFILE DETAILS
+========================================================= */
 
 .profile-details {
   flex: 1;
+
+  min-width: 0;
 }
 
 .profile-details h2 {
@@ -190,7 +269,7 @@
 
   font-size: 21px;
 
-  color: #3b2a20;
+  color: #ffffff;
 }
 
 .profile-role {
@@ -198,11 +277,13 @@
 
   font-size: 13px;
 
-  color: #9b806c;
+  color: #888888;
 }
 
 
-/* Stats */
+/* =========================================================
+   STATS
+========================================================= */
 
 .profile-stats {
   display: flex;
@@ -214,6 +295,7 @@
 
 .stat {
   display: flex;
+
   flex-direction: column;
 
   align-items: center;
@@ -224,40 +306,47 @@
 .stat strong {
   font-size: 19px;
 
-  color: #5a3825;
+  color: #ffffff;
 }
 
 .stat span {
   font-size: 11px;
 
-  color: #9b806c;
+  color: #888888;
 }
 
 
-/* =========================
+/* =========================================================
    SECURITY CARD
-========================= */
+========================================================= */
 
 .security-card {
   min-height: 190px;
 
-  box-sizing: border-box;
-
   padding: 28px;
 
-  background: #5a3825;
-  color: #fffaf2;
-
-  border-radius: 18px;
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
 
   gap: 20px;
+
+  background: #ffffff;
+
+  color: #000000;
+
+  border-radius: 18px;
+
+  border: 1px solid #ffffff;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 
-/* Lock */
+/* =========================================================
+   SECURITY ICON
+========================================================= */
 
 .security-icon {
   width: 50px;
@@ -265,52 +354,63 @@
 
   flex-shrink: 0;
 
-  border-radius: 13px;
-
-  background: rgba(255, 250, 242, 0.12);
-
   display: flex;
+
   align-items: center;
   justify-content: center;
+
+  border-radius: 13px;
+
+  background: #eeeeee;
+
+  color: #000000;
 
   font-size: 21px;
 }
 
 
-/* Security content */
+/* =========================================================
+   SECURITY CONTENT
+========================================================= */
+
+.security-content {
+  min-width: 0;
+}
 
 .security-content h2 {
   margin: 0;
 
   font-size: 19px;
 
-  color: #fffaf2;
+  color: #000000;
 }
 
 .security-content p {
-  margin: 7px 0 17px;
-
   max-width: 350px;
+
+  margin: 7px 0 17px;
 
   font-size: 13px;
 
   line-height: 1.5;
 
-  color: #dbcabb;
+  color: #555555;
 }
 
 
-/* Password */
+/* =========================================================
+   PASSWORD BUTTON
+========================================================= */
 
 .password-btn {
   padding: 10px 16px;
 
-  border: 1px solid #e5d6c5;
+  background: #000000;
+
+  border: 1px solid #000000;
   border-radius: 8px;
 
-  background: #fffaf2;
-
-  color: #5a3825;
+  color: #ffffff;
 
   font-size: 12px;
   font-weight: 600;
@@ -321,15 +421,15 @@
 }
 
 .password-btn:hover {
-  transform: translateY(-1px);
+  background: #222222;
 
-  background: #f4e7d8;
+  transform: translateY(-1px);
 }
 
 
-/* =========================
+/* =========================================================
    FORM CARD
-========================= */
+========================================================= */
 
 .profile-form-card {
   max-width: 1100px;
@@ -340,16 +440,19 @@
 
   box-sizing: border-box;
 
-  background: #fffaf2;
+  background: #111111;
 
-  border: 1px solid #e5d6c5;
+  border: 1px solid #2d2d2d;
+
   border-radius: 18px;
 
-  box-shadow: 0 8px 30px rgba(91, 62, 42, 0.07);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 
-/* Heading */
+/* =========================================================
+   SECTION HEADING
+========================================================= */
 
 .section-heading {
   margin-bottom: 30px;
@@ -360,7 +463,7 @@
 
   font-size: 20px;
 
-  color: #3b2a20;
+  color: #ffffff;
 }
 
 .section-heading p {
@@ -368,13 +471,13 @@
 
   font-size: 13px;
 
-  color: #9b806c;
+  color: #888888;
 }
 
 
-/* =========================
+/* =========================================================
    FORM ROW
-========================= */
+========================================================= */
 
 .form-row {
   display: grid;
@@ -385,9 +488,9 @@
 }
 
 
-/* =========================
-   INPUTS
-========================= */
+/* =========================================================
+   FORM GROUP
+========================================================= */
 
 .form-group {
   margin-bottom: 22px;
@@ -401,8 +504,13 @@
   font-size: 13px;
   font-weight: 600;
 
-  color: #5a4030;
+  color: #dddddd;
 }
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
 
 .form-group input {
   width: 100%;
@@ -412,39 +520,39 @@
 
   box-sizing: border-box;
 
-  border: 1px solid #ddcbb8;
+  background: #0b0b0b;
+
+  border: 1px solid #333333;
 
   border-radius: 10px;
 
   outline: none;
 
-  background: #fffdf8;
+  color: #ffffff;
 
   font-size: 14px;
-
-  color: #3b2a20;
 
   transition: 0.2s;
 }
 
 .form-group input::placeholder {
-  color: #b29a86;
+  color: #666666;
 }
 
 .form-group input:hover {
-  border-color: #c6a98e;
+  border-color: #555555;
 }
 
 .form-group input:focus {
-  border-color: #795238;
+  border-color: #ffffff;
 
-  box-shadow: 0 0 0 3px rgba(121, 82, 56, 0.10);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
 }
 
 
-/* =========================
+/* =========================================================
    LOCATION
-========================= */
+========================================================= */
 
 .location-grid {
   display: grid;
@@ -461,13 +569,13 @@
 
   font-size: 12px;
 
-  color: #9b806c;
+  color: #777777;
 }
 
 
-/* =========================
+/* =========================================================
    ACTIONS
-========================= */
+========================================================= */
 
 .form-actions {
   display: flex;
@@ -478,11 +586,13 @@
 
   padding-top: 10px;
 
-  border-top: 1px solid #eadbca;
+  border-top: 1px solid #2d2d2d;
 }
 
 
-/* Buttons */
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .cancel-btn,
 .save-btn {
@@ -493,7 +603,6 @@
   border-radius: 9px;
 
   font-size: 13px;
-
   font-weight: 600;
 
   cursor: pointer;
@@ -502,43 +611,52 @@
 }
 
 
-/* Cancel */
+/* =========================================================
+   CANCEL
+========================================================= */
 
 .cancel-btn {
-  background: #fffaf2;
+  background: #111111;
 
-  border: 1px solid #ddcbb8;
+  border: 1px solid #444444;
 
-  color: #6f5543;
+  color: #ffffff;
 }
 
 .cancel-btn:hover {
-  background: #f4e8da;
+  background: #222222;
+
+  border-color: #666666;
 }
 
 
-/* Save */
+/* =========================================================
+   SAVE
+========================================================= */
 
 .save-btn {
-  background: #6b4630;
+  background: #ffffff;
 
-  border: 1px solid #6b4630;
+  border: 1px solid #ffffff;
 
-  color: #fffaf2;
+  color: #000000;
 }
 
 .save-btn:hover {
-  background: #543522;
+  background: #dddddd;
+
+  border-color: #dddddd;
 
   transform: translateY(-1px);
 }
 
 
-/* =========================
-   TABLET
-========================= */
+/* =========================================================
+   LARGE TABLET / SMALL DESKTOP
+   BELOW 1100px
+========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
 
   .edit-profile-page {
     padding: 35px 25px;
@@ -551,18 +669,19 @@
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   TABLET
+   BELOW 850px
+========================================================= */
 
-@media (max-width: 650px) {
+@media (max-width: 850px) {
 
   .edit-profile-page {
-    padding: 25px 16px;
+    padding: 30px 20px;
   }
 
   .edit-profile-header h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .profile-card {
@@ -585,6 +704,7 @@
 
   .form-row {
     grid-template-columns: 1fr;
+
     gap: 0;
   }
 
@@ -593,15 +713,128 @@
   }
 
   .profile-form-card {
+    padding: 28px 24px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   BELOW 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .edit-profile-page {
+    padding: 25px 16px;
+
+    margin: 0;
+
+    border-radius: 0;
+  }
+
+  .edit-profile-header {
+    margin-bottom: 25px;
+  }
+
+  .edit-profile-header h1 {
+    font-size: 28px;
+  }
+
+  .edit-profile-header p:last-child {
+    font-size: 13px;
+  }
+
+  .profile-top-section {
+    gap: 15px;
+  }
+
+  .profile-card {
+    padding: 30px 20px;
+
+    gap: 15px;
+  }
+
+  .profile-image-wrapper {
+    width: 95px;
+    height: 95px;
+  }
+
+  .profile-details h2 {
+    font-size: 20px;
+  }
+
+  .profile-stats {
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 30px;
+  }
+
+  .security-card {
     padding: 25px 20px;
+
+    gap: 15px;
+  }
+
+  .security-content p {
+    max-width: none;
+  }
+
+  .profile-form-card {
+    padding: 25px 20px;
+  }
+
+  .section-heading {
+    margin-bottom: 25px;
   }
 
   .form-actions {
     flex-direction: column-reverse;
+
+    gap: 10px;
   }
 
   .cancel-btn,
   .save-btn {
     width: 100%;
   }
+
+  .change-image-form {
+    width: 100%;
+  }
+
 }
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   BELOW 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .edit-profile-page {
+    padding: 20px 12px;
+  }
+
+  .edit-profile-header h1 {
+    font-size: 25px;
+  }
+
+  .profile-card {
+    padding: 25px 15px;
+  }
+
+  .profile-stats {
+    gap: 20px;
+  }
+
+  .profile-form-card {
+    padding: 22px 15px;
+  }
+
+}
+

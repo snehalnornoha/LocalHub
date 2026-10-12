@@ -22,8 +22,8 @@ export async function  getAPI(url,mthd = 'GET',isRefresh = true){
 
     }
     catch(error){
-        console.log(error)
-        return {success :false}
+        console.log("//////",error)
+        return {success :false ,msg :"hi" }
     }
 }
 export async function  mthdAPI(url,mthd='POST',package_data,isRefresh = true){
@@ -37,8 +37,9 @@ export async function  mthdAPI(url,mthd='POST',package_data,isRefresh = true){
             credentials: "include",
             body: JSON.stringify(package_data)
         });    
+        const data = await res.json(); 
         if(res.ok){
-            const data = await res.json(); 
+            console.log("daata", data)
             return data
         }
         else if(res.status === 401 && isRefresh){
@@ -47,12 +48,16 @@ export async function  mthdAPI(url,mthd='POST',package_data,isRefresh = true){
                 return mthdAPI(url ,mthd,package_data ,false)
             }
         }
+        else if(res.status === 409){
+            console.log(data)
+             throw new Error(data.error)
+        }
         throw new Error("something went wrong")
 
     }
     catch(error){
-        console.log(error)
-        return {success :false}
+        console.log("--->",error)
+        return {success :false ,msg : error.message}
     }
 }
 
@@ -60,7 +65,7 @@ export async function refresh_credentials(){
    
     console.log("sending request to srver for jwt")
     try{
-        const res = await fetch(`${API_URL}/api/refresh_token`, {
+        const res = await fetch(`${path}/api/refresh_token`, {
             credentials: "include"
         })
         if(res.ok){
@@ -75,7 +80,7 @@ export async function refresh_credentials(){
     }
   
     catch(err) {
-            console.log(err)
+            console.log("////",err)
             alert("please login again to continue")}
             return {success : false}        
 }

@@ -1,9 +1,10 @@
 import './Login.css'
 import { useActionState, useEffect, useState } from 'react';
-import {useNavigate ,Link} from "react-router-dom";
+import {useNavigate ,Link, data} from "react-router-dom";
 import { mthdAPI } from '../controlers';
 const API_URL = import.meta.env.VITE_API_URL;
 import app_logo from '../assets/app_logo.png'
+import ForgotPassword from './forget_pass';
 //login fetch function
 
 
@@ -13,11 +14,12 @@ const handle_Login = async (state , frm_data) =>{
   let  pass = frm_data.get("password")
   let  cpass = frm_data.get("cpassword")
   let  mail = frm_data.get("Email")
-  let ilg = frm_data.get("islog")
-  const log_url = !ilg ?`api/signup`: `api/login`
+  let ilg = frm_data.get("islog") === 'true'
+
+  const log_url = ilg ?`api/signup`: `api/login`
   const js_send = {username : un , password : pass , gmail : mail };
   const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-   console.log("blblb:",log_url , js_send)
+   console.log("blblb:",log_url , js_send,ilg)
 
 
   if(un && pass && mail ){
@@ -28,36 +30,42 @@ const handle_Login = async (state , frm_data) =>{
         console.log("blblb:",log_url , js_send)
         const ans =await mthdAPI(log_url,'POST',js_send,true)
         console.log("msg" , ans)
-        return ans.msg
+        if(ans.success){
+          return ans
+        }
+        else{
+          return {er : ans.msg,un ,pass ,cpass ,mail }
+        }
       }
         return {er : "mis-matching password",un ,pass ,cpass ,mail }
-
-
       }
   }
 
 
 function Auth(props) {
   const [islog , setIslog] = useState(true)
+  const [isedit, setIsedit] = useState(false)
   const [data ,action , panding] = useActionState(handle_Login)
   const navi = useNavigate()
   
   
   useEffect(() => {
+    console.log("?///",data)
     if(data?.success)
     {
     props.setIslogedin(true)
     navi('/')
     }
    }, [data]);
- 
-
+  if(isedit){
+      return(<ForgotPassword setIsedit={setIsedit}/>)
+  }
+  else{
   return (
 
     <div className="auth_parent">
         <div className="auth_child1">
-        {//<span id = "islog" onClick={() =>setIslog(!islog)}> {islog ? "Already have an account? Log in":"Dont have an account ? sign up"}</span>
-}
+        
         <div className="toggle">
             <button  onClick={()=>{setIslog(false)}} className={!islog?'isactive':'inactive'}>Log in</button>
             <button onClick={()=>{setIslog(true)}}  className={islog?'isactive':'inactive'}>Sign up</button>
@@ -99,7 +107,10 @@ function Auth(props) {
         <p style={{color : "red"}}>{data?.er}</p>
        
         {panding ? <p>loading ....</p>:
-        <button  onClick={() => mthdAPI('api/login','POST',{js_send:"hi"},true)} className = "sumbt" type="submit">Login</button>
+        <>
+        <button   className = "sumbt" type="submit">{!islog ? 'Login' : 'Sign up'}</button>
+        {!islog && <span onClick={()=>setIsedit(true)} className='links_f'>Forogot Password?</span>}
+        </>
         }
       </form>
     </div>
@@ -113,5 +124,6 @@ Find the shop around the corner, the event this weekend, and the neighbour who c
     </div>
     </div>
   )
+}
 }
 export default Auth;

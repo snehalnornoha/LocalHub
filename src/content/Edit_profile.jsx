@@ -1,11 +1,12 @@
-import { refrsh_jwt_token } from './controlers';
 import { useActionState ,useState} from 'react';
 import './Edit_profile.css';
 import { useEffect } from 'react';
-import profile_img from "./assets/profile.jpg";
+import profile_img from "../assets/profile.jpg";
 import imageCompression from 'browser-image-compression';
 import { useNavigate} from 'react-router-dom';
-const API_URL = import.meta.env.VITE_API_URL;
+import { mthdAPI ,refresh_credentials} from '../controlers';
+const API_URL = import.meta.env.VITE_OTHER_SIDE_PATH;
+
 const options = {
   maxSizeMB: 1,             // Maximum size
   maxWidthOrHeight: 1920,   // Resize large images
@@ -13,61 +14,42 @@ const options = {
   initialQuality: 0.8,      // JPEG/WebP quality
 };
 
-/*
+
 const send_updated_profile = async(data,one_time_refresh)=>{
-    const res = await fetch(`${API_URL}/protectedApi/edit_profile`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials:"include",
-      body: JSON.stringify(data),
-    });
-    console.log(res)
-   
-    if(res.ok){ 
-      const ans = await res.json()
-     
-
-      
-      return ans;
-      
-    }
-    else if(res.status === 401 && one_time_refresh) {
-  
-          const refreshed = await refrsh_jwt_token();
-
-          if (refreshed.success) {
-              return await send_updated_profile(data, false);
-          }
-
-    }
-    else { throw new Error(`Profile update failed: ${res.status}`)}
-  
-}*/
+    const ans = await mthdAPI('protectedApi/edit_profile',"PUT",data,true)
+    if(ans.success){
+        return ans;
+    } else { throw new Error(`Profile update failed: ${res.status}`)}
+}
 
 
 async function updateProfile(previousState, formData) {
 
 const name = formData.get("name");
-const state = formData.get("state");
-const pin = formData.get("pin");
 const country = formData.get("country");
+const state = formData.get("state");
+const district = formData.get("district");
+const taluk = formData.get("taluk");
+const locality = formData.get("locality");
 const user_info =JSON.parse(formData.get("user_info"));
 let location = false;
 
-
-if(state ==="" || pin === "" || country===""){return alert("please enter the location")}
-if(state !==user_info.location.state || pin !== user_info.location.pin || country!==user_info.location.country){
-  
-    location = {
-    pin : user_info.location.pin !== pin ?  pin :user_info.location.pin,
-    state : user_info.location.state !== state ?  state  :user_info.location.state,
-    country :user_info.location.country !== country ? country  :user_info.location.country
+if (state === "" ||district === "" ||taluk === "" ||locality === ""|| country===""){
+  return alert("Please enter the location");
 }
 
-}
+if (state !== user_info.location.state ||district !== user_info.location.district ||
+  taluk !== user_info.location.taluk ||locality !== user_info.location.locality|| country!==user_info.location.country) 
+  {
+  location = {
 
+    country :user_info.location.country !== country ? country  :user_info.location.country,
+    state: user_info.location.state !== state? state: user_info.location.state,
+    district: user_info.location.district !== district? district: user_info.location.district,
+    taluk: user_info.location.taluk !== taluk? taluk: user_info.location.taluk,
+    locality: user_info.location.locality !== locality? locality: user_info.location.locality
+  };
+}
 
 
 
@@ -105,15 +87,19 @@ if(state !==user_info.location.state || pin !== user_info.location.pin || countr
 
 function Edit_profile(prop) {
   let user_info =prop.user_info.current.data
+
   const [state, formAction, isPending] = useActionState(updateProfile , null);
   const [is_prof_edit ,setIs_prof_edit] = useState(false)
   const [prof_change_img ,setProf_change_img ] = useState(null)
+  const [isLoadingg ,setIsLoadingg] = useState(false)
   const navi = useNavigate()
 
   const profileIMGchage = (e)=>{
     setProf_change_img(e.target.files[0])
   }
   const update_image = async(is_refresh)=>{
+
+      setIsLoadingg(true)
       const snd_data = new FormData()
       if(prof_change_img.length===0){alert("select the image to change the profile");return}
       const compressed = await imageCompression(prof_change_img, options);
@@ -121,7 +107,7 @@ function Edit_profile(prop) {
       snd_data.append("imgurl" , user_info.profile_image_url)
 
 
-    /*
+    
       try{
                             
         const res = await fetch(`${API_URL}/protectedApi/updtprofimg`, {
@@ -135,16 +121,14 @@ function Edit_profile(prop) {
                 prop.user_info.current.data.profile_image_url   = data.imgurl
                 user_info.profile_image_url   = data.imgurl
                 console.log(data.imgurl)
-                if(prop.setIn_c_profile !== "undefined"){
-                prop.setIn_c_profile(true)
-                }
-                navi(`/`)
+                setIsLoadingg(false)
+              
                 
                 }
                 
         
         else if (res.status === 401 && is_refresh) {
-                    const refreshed = await refrsh_jwt_token();
+                    const refreshed = await refresh_credentials();
         
                     if (refreshed.success) {
                         console.log("hi token rfreshed ")
@@ -162,7 +146,7 @@ function Edit_profile(prop) {
       catch(err){
           alert(err)
       }
-          */
+          
   }
   useEffect(()=>{
     console.log("===========",user_info)
@@ -174,9 +158,9 @@ function Edit_profile(prop) {
       prop.user_info.current.check = true
       prop.setPagerefresh(!prop.pagerefresh)
       if(prop.setIn_c_profile !== "undefined"){
-                prop.setIn_c_profile(true)
-                }
-                navi(`/`)
+      prop.setIn_c_profile(true)
+      }
+      navi(`/`)
       
       
     }
@@ -189,7 +173,8 @@ function Edit_profile(prop) {
   }
 
   const go_back = () =>{
-    if(user_info.location.state ==="" || user_info.location.pin === "" || user_info.location.country==="")
+    console.log("LAAALLA",prop.user_info.current.data.location.length)
+    if(user_info.location.state ==="" || user_info.location.pin === "" || user_info.location.country==="" || Object.keys(user_info.location).length === 0)
       {return alert("please enter the location")}
     console.log(user_info)
     if(prop.setIn_c_profile !== "undefined"){
@@ -221,27 +206,31 @@ function Edit_profile(prop) {
         <div className="profile-card">
 
           <div className="profile-image-wrapper">
-            <img
-              src={user_info?.profile_image_url ||profile_img}
-              alt="Profile"
-              className="profile-image"
-            />
-
-            <button onClick={()=>{setIs_prof_edit(true)}} className="change-image-btn">
-              ✎
-            </button>
-           {is_prof_edit &&
-            <div className="change-image-form">
-              <h3>Change Profile Image</h3>
-              <input
-                  type="file"
-                  accept="image/*"
-                  onChange={profileIMGchage}
+            {isLoadingg ? <p>loading</p>:
+            <>
+              <img
+                src={user_info?.profile_image_url ||profile_img}
+                alt="Profile"
+                className="profile-image"
               />
-              <button className="sndprofile"onClick={()=>{update_image(true)}} type="button">Send</button>
-              <button type="button" onClick={()=>{setIs_prof_edit(false)}}>Cancel</button>
-          </div>
-          }
+
+              <button onClick={()=>{setIs_prof_edit(true)}} className="change-image-btn">
+                ✎
+              </button>
+              {is_prof_edit &&
+                <div className="change-image-form">
+                  <h3>Change Profile Image</h3>
+                  <input
+                      type="file"
+                      accept="image/*"
+                      onChange={profileIMGchage}
+                  />
+                  <button className="sndprofile"onClick={()=>{update_image(true)}} type="button">Send</button>
+                  <button type="button" onClick={()=>{setIs_prof_edit(false)}}>Cancel</button>
+              </div>
+              }
+            </>
+              }
           </div>
 
 
@@ -252,18 +241,11 @@ function Edit_profile(prop) {
 
           <div className="profile-stats">
 
-            <div className="stat">
-              <strong>{user_info?.total_swaps ?? 0}</strong>
-              <span>Swaps</span>
-            </div>
-
-            <div className="stat">
-              <strong>{user_info?.reputation_score ?? 0}</strong>
-              <span>Rating</span>
-            </div>
+           
 
           </div>
 
+        
         </div>
 
 
@@ -328,22 +310,18 @@ function Edit_profile(prop) {
             <label>Location</label>
 
             <div className="location-grid">
-
               <div>
                 <label className="sub-label">Country</label>
 
                 <input
                   type="text"
-                  placeholder="Enter country"
+                  placeholder="Enter Country"
                   defaultValue={user_info?.location?.country}
                   name="country"
                 />
               </div>
-
-
-              <div>
+              <div >
                 <label className="sub-label">State</label>
-                
 
                 <input
                   type="text"
@@ -354,16 +332,38 @@ function Edit_profile(prop) {
               </div>
 
 
+
               <div>
-                <label className="sub-label">Pincode</label>
+                <label className="sub-label">District</label>
+                
 
                 <input
                   type="text"
-                  placeholder="Enter pincode"
-                  maxLength="6"
-                  inputMode="numeric"
-                  defaultValue={user_info?.location?.pin}
-                   name="pin"
+                  placeholder="Enter district"
+                  defaultValue={user_info?.location?.district}
+                  name="district"
+                />
+              </div>
+              <div>
+                <label className="sub-label">Taluk</label>
+                
+
+                <input
+                  type="text"
+                  placeholder="Enter taluk"
+                  defaultValue={user_info?.location?.taluk}
+                  name="taluk"
+                />
+              </div>
+              <div>
+                <label className="sub-label">locality</label>
+                
+
+                <input
+                  type="text"
+                  placeholder="Enter locality"
+                  defaultValue={user_info?.location?.locality}
+                  name="locality"
                 />
               </div>
 
