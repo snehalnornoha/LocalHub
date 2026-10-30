@@ -56,8 +56,10 @@ function CreatePost(props) {
    console.log("sending to",API_URL)
    console.log("A: Before fetch");
 
-fetch(`${API_URL}/`, {
-    method: "GET"
+fetch(`${API_URL}/protectedApi/post_upload`, {
+    method: "POST",
+     credentials: "include",
+        body: pst_send
 })
 .then(res => {
     console.log("B: Server responded:", res.status);
