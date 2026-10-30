@@ -93,6 +93,7 @@ useEffect(()=>{
     
       console.log("naao paji",prop.reqst.current)
   if(!prop.reqst.current.check){
+     setUserRequest(prop.reqst.current.data)
    
     return  
     }

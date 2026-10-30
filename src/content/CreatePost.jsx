@@ -56,8 +56,7 @@ function CreatePost(props) {
       pst_send.append(key , value)
     })
    console.log("sending to",API_URL)
-   const data123 = await mthdAPI('protectedApi/post_upload',"POST",{b : "ijnhh"},true)
-   console.log(data123)
+   
    
     const res = await fetch(
       `${API_URL}/protectedApi/post_upload`,
