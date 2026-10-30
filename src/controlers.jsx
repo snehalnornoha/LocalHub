@@ -39,7 +39,7 @@ export async function  mthdAPI(url,mthd='POST',package_data,isRefresh = true){
         });    
         const data = await res.json(); 
         if(res.ok){
-            console.log("daata", data)
+            console.log("data", data)
             return data
         }
         else if(res.status === 401 && isRefresh){
