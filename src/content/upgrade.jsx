@@ -1,5 +1,5 @@
 import './upgrade.css'
-import ProfCard, { UpgradeCard } from './ProfCard'
+import ProfCard, { Loading, UpgradeCard } from './ProfCard'
 import { useRef, useState } from 'react';
 import { getAPI, mthdAPI } from '../controlers';
 import { useEffect } from 'react';
@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 function Upgrade(prop){
     const user = prop.user_info.current.data
+    const [isLoadingg ,setIsLoadingg] = useState(false)
     console.log("????????",user)
     const [role , setRole]= useState("")
     const desc = useRef(null);
@@ -66,6 +67,7 @@ function Upgrade(prop){
 
     
 const snd_rqst = async()=>{
+    setIsLoadingg(true)
     const description = desc.current.value;
 
     if(role === "" && description === ""){
@@ -82,17 +84,21 @@ const snd_rqst = async()=>{
         
 
     }
+    setIsLoadingg(false)
 
 
 }
 
 useEffect(()=>{
+    
       console.log("naao paji",prop.reqst.current)
   if(!prop.reqst.current.check){
    
     return  
     }
+    
     const initil_fun = async()=>{
+        setIsLoadingg(true)
         const ans =  await getAPI('protectedApi/sndreqst',"GET",true);
         console.log("yellow",ans.data.length)
         if(ans.success){
@@ -106,9 +112,11 @@ useEffect(()=>{
             }
             
         }
+         setIsLoadingg(false)
 
     }
     const  initil_fun_grant = async()=>{
+        setIsLoadingg(true)
         const ans = await mthdAPI('protectedApi/grntreqst',"POST",{page : 0},true);
         console.log("tosha",ans)
          if(ans.success){
@@ -116,6 +124,7 @@ useEffect(()=>{
              prop.reqst.current.data = ans.posts
             setUserRequest(ans.posts)
         }
+        setIsLoadingg(false)
 
     }
     if(["user", "business"].includes(user.role)){
@@ -123,7 +132,7 @@ useEffect(()=>{
     }else if(["admin","local_community_representative", "local_community_member"].includes(user.role)){
         initil_fun_grant()
     }
-
+   
 
 },[])
 
@@ -135,6 +144,8 @@ useEffect(()=>{
     
     {["user", "business"].includes(user.role)&&
     <div className="up_content">
+        {isLoadingg?<Loading/>:
+        <>
          <div className="rqsts_header">
         <h2>Account Types & Roles</h2>
         <p>Understand account permissions and available upgrades.</p>
@@ -169,6 +180,8 @@ useEffect(()=>{
 
         <button onClick={()=>snd_rqst()}>Upgrade</button>
         </div>
+        }
+        </>
         }
         
 <div className="rqsts_contnr2">

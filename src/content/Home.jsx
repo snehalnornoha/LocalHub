@@ -5,6 +5,7 @@ import Post_cards from './Cards';
 import Edit_profile from './Edit_profile';
 import { getAPI ,mthdAPI} from '../controlers';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from './ProfCard';
  const categories = [
     "Explore",
     "Jobs",
@@ -205,8 +206,8 @@ const handleSearch = async () => {
                  
                
             </div>
-            
-               
+            {isLoadingg ? <Loading/>
+              :<>
             <div className="home_content">
 
                 {
@@ -244,6 +245,8 @@ const handleSearch = async () => {
               <h2>THERE IS NO POSTS </h2> 
               <h3>please try diffrent catogory</h3>
               </> }
+              </> 
+                }
             
         </div>
     )

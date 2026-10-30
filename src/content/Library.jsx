@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./Library.css";
 import Post_cards from "./Cards";
 import { getAPI ,mthdAPI} from '../controlers';
+import { Loading } from "./ProfCard";
 
 
 
@@ -120,7 +121,7 @@ function Library(prop) {
                     LIKES
                 </div>
             </div>
-
+             { isLoadingg ?<Loading/> :        
             <div className="Library-content">
               
             
@@ -154,6 +155,7 @@ function Library(prop) {
                 }} >Back</button>
                 }
             </div>
+                }
         </div>
     );
 }

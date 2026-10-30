@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { mthdAPI } from "../controlers";
 import {  Trash2 } from "lucide-react";
 import { useEffect } from "react";
+import { Loading } from "./ProfCard";
 
 function Cmnt_card({ cmnt ,post_id, user_id ,postCmnt ,setComments}) {
     console.log(postCmnt)
@@ -106,13 +107,13 @@ export default function Comment({ cmnts,setIscmnt ,info_cmnt ,user_id ,all_Cmnt}
                 <span>Comments</span>
                 <button onClick={()=>onClose()}>×</button>
             </div>
-            {cmntloading?<p>Loading.....</p> :
+            {cmntloading?<Loading/> :
             <>
                 <div className="comments_list">
                     {comments.map((cmnt , indx) => (
                         <Cmnt_card key={indx} cmnt={cmnt} user_id ={user_id }  post_id={info_cmnt.post_id}  postCmnt={postCmnt} setComments={setComments} />
                     ))}
-                    {sedingCmnt &&<p>.....</p>}
+                    {sedingCmnt &&<Loading/>}
                 </div>       
                 <div className="chat-input">
                 <input  type="text" placeholder="Type a message..."onChange={(e)=>setMsg_text(e.target.value)} />

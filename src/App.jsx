@@ -99,12 +99,38 @@ const likedpst = useRef({
     data :[]
   })
 
+  useEffect(()=>{
+    return()=>{
+
+        logout()
+    }
+  },[])
   
 
    
 
-  const logout = ()=>{
-    console.log("logout")
+  const logout = async()=>{
+    try {
+            const result= await getAPI('protectedApi/logout','GET',true)
+          
+    
+            if (result.success) {
+    
+                // logout successful
+                setIsLogedin(false);
+                user_info.current.data = {}
+                Notification.current.data = []            
+                
+            }
+            else {
+                throw new Error(`Logout Eroor :`);
+            }
+    
+        } catch (err) {
+            console.log(err);
+            alert("log out error : pls try again");
+        }
+    
   }
   const viewProfile = ()=>{
     console.log("viewPort")
@@ -206,7 +232,7 @@ useEffect(() => {
           <NavLink className="menu_item" to ='/upgrd'><ArrowUpCircleIcon className='micons'/><h2>Upgrade</h2></NavLink>
           <NavLink className="menu_item" to ='/lib'><Bookmark className='micons'></Bookmark ><h2>Liked and saved</h2></NavLink>
           <NavLink className="menu_item info"  to =  "/about_app"><Info className='micons'/><h2>About</h2></NavLink>
-           <div className="menu_item" onClick={logout}>
+           <div className="menu_item" onClick={()=>logout()}>
              <LogOutIcon/><h2>Log out</h2>
            </div>
         

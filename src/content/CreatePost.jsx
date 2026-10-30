@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 const API_URL = import.meta.env.VITE_OTHER_SIDE_PATH;
 import { refresh_credentials} from '../controlers';
 import { useNavigate } from "react-router-dom";
+import { Loading } from "./ProfCard";
 
 
 const options = {
@@ -300,7 +301,11 @@ function CreatePost(props) {
               
             </button>
         </>
-         : "Publishing..." }
+         :
+         <div>
+         <Loading/>"Publishing..." 
+         </div>
+         }
 
         </div>
 
