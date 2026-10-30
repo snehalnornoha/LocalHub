@@ -63,6 +63,7 @@ function CreatePost(props) {
       }
     );
     console.log(res.ok)
+    console.log("comppllted")
     const data = await res.json();
     if(res.ok){
       alert("your post sent successfully")
