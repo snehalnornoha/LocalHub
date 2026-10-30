@@ -46,13 +46,14 @@ function CreatePost(props) {
     try{
     const cmprsd_img =  await imageCompression(img, options);
     const pst_send = new FormData()
+    console.log("images is ok ")
     pst_send.append("images",cmprsd_img );
     pst_send.append("user_img_url",user_img_url);
     Object.entries(frmdata).forEach(([key , value])=>{
       console.log(key,value)
       pst_send.append(key , value)
     })
-   
+   console.log("sending to",API_URL)
     const res = await fetch(
       `${API_URL}/protectedApi/post_upload`,
       {
