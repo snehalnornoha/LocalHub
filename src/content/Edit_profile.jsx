@@ -236,7 +236,7 @@ function Edit_profile(prop) {
 
           <div className="profile-details">
             <h2>{user_info?.name}</h2>
-            <p className="profile-role">Member</p>
+            <p className="profile-role">{user_info.role}</p>
           </div>
 
           <div className="profile-stats">

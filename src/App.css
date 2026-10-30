@@ -195,30 +195,7 @@ textarea:focus-visible {
   background: var(--border);
 }
 
-.user_profile::before{
-   content: "";
 
-  position: absolute;
-
-  left: 1px;
-  right: 1px;
-  top: -10px;
-  height: 1px;
-  background: var(--border);
-}
-.user_profile{
-  height: 50px;
-  width: 100%;
-  position: relative;
- 
-}
-.user_profile img{
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  
-}
 
 .profmenu{
   display: flex;
@@ -415,9 +392,7 @@ textarea:focus-visible {
 
     padding: 10px;
   }
-  .user_profile span,
-  .user_profile h2,
-  .user_profile::before,
+ 
   .left_sidebar .menu_item h2 {
     display: none;
   }
@@ -452,10 +427,7 @@ textarea:focus-visible {
 
     padding: 10px 5px;
   }
-  .user_profile img{
-    height: 40px;
-    width: 40px;
-  }
+
   .profmenu{
     width: 60px;
     height: 50px;
@@ -514,10 +486,7 @@ textarea:focus-visible {
     width: 20px;
     height: 20px;
   }
-   .user_profile img{
-    height: 30px;
-    width: 30px;
-  }
+
   .profmenu{
     width: 50px;
     height: 50px;

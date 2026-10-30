@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import './Notification.css';
+import './Noti.css';
 import {useNavigate ,Link} from "react-router-dom";
+import { getAPI } from '../controlers';
 
-import { refrsh_jwt_token} from './controlers.jsx';
-const API_URL = import.meta.env.VITE_API_URL;
+
+
 
 const NoticCard = ({ notification ,direct }) => {
-    console.log(notification)
+    console.log("ooooo",notification)
     
     let when = notification.created_at || "Just now"
 
@@ -15,7 +16,6 @@ const NoticCard = ({ notification ,direct }) => {
             <div className="notic-icon">
                 🔔
             </div>
-
             <div className="notic-content">
                 <p>{notification.msg}</p>
                 <span>{when}</span>
@@ -28,40 +28,23 @@ const NoticCard = ({ notification ,direct }) => {
 
 function Notificationpage(prop) {
     const navi  = useNavigate()
-
-    const [chats , setChats ] = useState([]);
-
-
     const [others ,setOthers ]  = useState([])
-     
+
     useEffect(()=>{
         const all_noti = prop.Notification.current.data ||[]
-        const chat_noti = all_noti?.filter(noti => noti.type === "chat-msg" )
-        const other_noti = all_noti?.filter(noti => noti.type !== "chat-msg" )
-        console.log(chat_noti ,other_noti)
-        setChats(chat_noti)
-        setOthers(other_noti)
+    
+        console.log(all_noti)
+  
+        setOthers(all_noti)
 
         return()=>{
-            const send_seen = async(one_time_refresh)=>{
+            const send_seen = async()=>{
               try {
-                        const res = await fetch(`${API_URL}/protectedApi/noti_seen`, {
-                            method: "GET",
-                            credentials: "include",
-                        });
+                        const res = await getAPI('protectedApi/noti_seen','GET',true)
             
-                        if(res.ok){
-                            const data = await res.json();
-                            console.log(data);
+                        if(res.success){
+                            console.log(res);
                         }
-            
-                        else if(res.status === 401 && one_time_refresh){
-                            const refreshed = await refrsh_jwt_token()
-                            if (refreshed.success) {
-                                send_seen(false);
-                            }
-                        }
-            
                         else{
                             throw new Error("access denied pls try again");
                         }
@@ -73,6 +56,7 @@ function Notificationpage(prop) {
             prop.setNoti_length(0)
             send_seen(true)
         }
+           
     },[])
 
     return (
@@ -85,29 +69,8 @@ function Notificationpage(prop) {
             </div>
 
 
-            {chats.length > 0 && (
                 <section className="notification-section">
 
-                    <h2>Chats</h2>
-
-                    <div className="notification-list">
-                        {chats.map((not,indx) => (
-                            <NoticCard
-                                key={indx}
-                                notification={not}
-                                direct ='/chat'
-                            />
-                        ))}
-                    </div>
-
-                </section>
-            )}
-
-
-            {others.length > 0 && (
-                <section className="notification-section">
-
-                    <h2>Others</h2>
 
                     <div className="notification-list">
                         {others.map((not , indx) => (
@@ -120,7 +83,7 @@ function Notificationpage(prop) {
                     </div>
 
                 </section>
-            )}
+         
 
         </div>
     );

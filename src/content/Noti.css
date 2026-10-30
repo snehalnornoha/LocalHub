@@ -6,7 +6,7 @@
     padding: 40px 8%;
     box-sizing: border-box;
 
-    background: #f7f7f7;
+    background: #0c0c0c;
 }
 
 
@@ -26,14 +26,14 @@
     margin: 0;
     font-size: 28px;
     font-weight: 700;
-    color: #222;
+    color: #e6e1e1;
 }
 
 .notification-header button {
     border: none;
     background: transparent;
 
-    color: #6b3f2a;
+    color: #1aa494;
     font-size: 14px;
     font-weight: 600;
 

@@ -1,0 +1,472 @@
+
+/* =========================================
+   UPGRADE PAGE — BLACK THEME
+========================================= */
+
+.up_parent {
+    width: 100%;
+    min-height: 100vh;
+    padding: 28px;
+    box-sizing: border-box;
+    background: #0b0b0b;
+    color: #eeeeee;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================
+   BUTTONS — TOP ACTIONS
+========================================= */
+
+.up_parent .upbtn {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.up_parent button {
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.up_parent .upbtn button {
+    padding: 11px 19px;
+    background: #eeeeee;
+    color: #111111;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.up_parent .upbtn button:hover {
+    background: #cccccc;
+    border-color: #cccccc;
+}
+
+/* =========================================
+   ACCOUNT TYPES MAIN CONTAINER
+========================================= */
+
+.up_parent .up_content {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    box-sizing: border-box;
+    background: #111111;
+    border: 1px solid #292929;
+    border-radius: 16px;
+}
+
+/* =========================================
+   SECTION HEADER
+========================================= */
+
+.up_parent .rqsts_header {
+    margin-bottom: 22px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #303030;
+}
+
+.up_parent .rqsts_header h2 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.up_parent .rqsts_header p {
+    margin: 0;
+    color: #999999;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   ROLE SELECTOR
+========================================= */
+.rqsts_selct {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    max-width: 620px;
+    box-sizing: border-box;
+    padding: 26px;
+    margin: 0 0 26px;
+    background: linear-gradient(145deg, #1c1c1c, #151515);
+    border: 1px solid #333333;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.rqsts_selct .slct {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+    margin: 0;
+}
+
+.rqsts_selct label {
+    color: #eeeeee;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.rqsts_selct select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    background: #242424;
+    color: #f2f2f2;
+    border: 1px solid #404040;
+    border-radius: 9px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rqsts_selct select:focus {
+    border-color: #aaaaaa;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+}
+
+.rqsts_selct select option {
+    background: #242424;
+    color: #f2f2f2;
+}
+
+.rqsts_selct textarea {
+    display: block;
+    width: 100%;
+    min-height: 125px;
+    box-sizing: border-box;
+    padding: 14px;
+    background: #242424;
+    color: #eeeeee;
+    border: 1px solid #404040;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rqsts_selct textarea::placeholder {
+    color: #888888;
+}
+
+.rqsts_selct textarea:focus {
+    border-color: #aaaaaa;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+}
+
+.rqsts_selct button {
+    align-self: flex-start;
+    min-height: 44px;
+    padding: 12px 25px;
+    background: #f0f0f0;
+    color: #161616;
+    border: 1px solid #f0f0f0;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.rqsts_selct button:hover {
+    background: #d5d5d5;
+    transform: translateY(-1px);
+}
+
+.rqsts_selct button:active {
+    transform: translateY(0);
+}
+
+.rqsts_selct button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   ACCOUNT TYPES & ROLES PANEL
+========================================= */
+
+.up_parent .rqsts_contnr2 {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.up_parent .role_list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 14px;
+}
+
+/* Individual role cards */
+
+.up_parent .role_item {
+    min-width: 0;
+    padding: 18px;
+    box-sizing: border-box;
+    background: #191919;
+    border: 1px solid #303030;
+    border-radius: 12px;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.up_parent .role_item:hover {
+    background: #1e1e1e;
+    border-color: #505050;
+    transform: translateY(-2px);
+}
+
+/* Role title and badge */
+
+.up_parent .role_title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.up_parent .role_title h3 {
+    margin: 0;
+    color: #f5f5f5;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.role_title > span,
+.up_parent .role_badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 9px;
+    background: #292929;
+    color: #c9c9c9;
+    border: 1px solid #404040;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+
+/* Role description */
+
+.up_parent .role_item > p {
+    margin: 12px 0;
+    color: #a5a5a5;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Permissions list */
+
+.up_parent .role_item ul {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 13px 0 0;
+    padding-left: 19px;
+    color: #d0d0d0;
+}
+
+.up_parent .role_item li {
+    padding-left: 2px;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.up_parent .role_item li::marker {
+    color: #888888;
+}
+
+/* Emphasized role restrictions */
+
+.up_parent .role_item li b {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* =========================================
+   IMPORTANT NOTE
+========================================= */
+
+.up_parent .role_note {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: #191919;
+    border: 1px solid #303030;
+    border-left: 3px solid #888888;
+    border-radius: 8px;
+}
+
+.up_parent .role_note strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #eeeeee;
+    font-size: 13px;
+}
+
+.up_parent .role_note p {
+    margin: 0;
+    color: #a5a5a5;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   UPGRADE REQUESTS SECTION
+========================================= */
+
+.up_parent .grant_content {
+    width: 100%;
+    min-width: 0;
+    margin-top: 32px;
+}
+
+.up_parent .grant_content > h2 {
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    color: #ffffff;
+    border-bottom: 1px solid #303030;
+    font-size: 23px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+/* Request card layout */
+
+.up_parent .rqsts_contnr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 18px;
+    width: 100%;
+    min-width: 0;
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.up_parent button:focus-visible,
+.up_parent select:focus-visible {
+    outline: 2px solid #aaaaaa;
+    outline-offset: 3px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+    .up_parent {
+        padding: 22px;
+    }
+
+    .up_parent .role_list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .up_parent .rqsts_contnr {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+
+@media (max-width: 600px) {
+    .up_parent {
+        padding: 13px;
+    }
+
+    .up_parent .upbtn {
+        gap: 9px;
+        margin-bottom: 18px;
+    }
+
+    .up_parent .upbtn button {
+        padding: 10px 13px;
+        font-size: 12px;
+    }
+
+    .up_parent .up_content {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .up_parent .rqsts_header h2 {
+        font-size: 20px;
+    }
+
+    .up_parent .rqsts_header p {
+        font-size: 12px;
+    }
+
+    .up_parent .rqsts_selct {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 11px;
+        padding: 13px;
+    }
+
+    .up_parent .rqsts_selct select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .up_parent .rqsts_selct button {
+        width: 100%;
+    }
+
+    .up_parent .role_list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .up_parent .role_item {
+        padding: 15px;
+    }
+
+    .up_parent .role_title h3 {
+        font-size: 14px;
+    }
+
+    .up_parent .grant_content {
+        margin-top: 25px;
+    }
+
+    .up_parent .grant_content > h2 {
+        font-size: 20px;
+    }
+}

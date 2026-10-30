@@ -45,14 +45,14 @@
 }
 
 /* Local Community Representative — Emerald Green */
-.LCR {
+.local_community_representative{
     background: linear-gradient(135deg, #123d30, #166534);
     border: 1px solid #34d399;
     color: #a7f3d0;
 }
 
 /* Local Community Member — Teal */
-.LCM {
+.local_community_member{
     background: linear-gradient(135deg, #164e63, #155e75);
     border: 1px solid #22d3ee;
     color: #a5f3fc;
@@ -234,6 +234,8 @@
 .btns svg:nth-child(2) {
     margin-left: auto;
 }
+
+
 
 /* ---------- Mobile ---------- */
 

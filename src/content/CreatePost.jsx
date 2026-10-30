@@ -4,6 +4,7 @@ import imageCompression from "browser-image-compression";
 import { useForm } from "react-hook-form";
 const API_URL = import.meta.env.VITE_OTHER_SIDE_PATH;
 import { refresh_credentials} from '../controlers';
+import { useNavigate } from "react-router-dom";
 
 
 const options = {
@@ -22,6 +23,7 @@ const datafields = {
 };
 
 function CreatePost(props) {
+  const navi = useNavigate()
   const [image1, setImage1] = useState(null);
   const [img, setImg] = useState(null);
   console.log(props.user_info.current.data)
@@ -62,6 +64,10 @@ function CreatePost(props) {
     const data = await res.json();
     if(res.ok){
       alert("your post sent successfully")
+      props.Explore.current.check= true
+      props.Explore.current.page.isnext= true
+      navi('/')
+      
    
     }
     else if (res.status === 401 && is_refresh) {

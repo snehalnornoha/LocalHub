@@ -1,9 +1,10 @@
 import { Bell, Search } from 'lucide-react';
 import  './Home.css'
-import { useState ,useEffect} from 'react';
+import { useState ,useEffect , useRef} from 'react';
 import Post_cards from './Cards';
 import Edit_profile from './Edit_profile';
 import { getAPI ,mthdAPI} from '../controlers';
+import { useNavigate } from 'react-router-dom';
  const categories = [
     "Explore",
     "Jobs",
@@ -18,19 +19,24 @@ import { getAPI ,mthdAPI} from '../controlers';
 
 
 function Ahome(prop){
+    const navi = useNavigate()
     const [activeCategory, setActiveCategory] = useState("Explore");
     const [in_c_profile , setIn_c_profile ] = useState(prop.isedit)
     const [pagerefesh ,setPagerefresh ] = useState(false)
     const [isLoadingg ,setIsLoadingg] = useState(false)
     const [dsplyPosts , setDsplyPosts] = useState([])
-    console.log("///",prop.isedit)
+    const [isSearch, setIsSearch] = useState(false);
+    const searchTypeRef = useRef(null);
+    const searchInputRef = useRef(null);
+    console.log("///",prop.savedpst,prop.likedpst)
    const arrRef = {
     Explore: prop.Explore,
     Jobs: prop.Jobs,
     Events: prop.Events,
     Alerts: prop.Alerts,
     Advertisements: prop.Advertisements,
-    PublicNotices: prop.PublicNotices
+    PublicNotices: prop.PublicNotices,
+    search:prop.search
     };
 
 
@@ -38,7 +44,7 @@ function Ahome(prop){
         console.log("vvvvvvvvv",dsplyPosts)
     },[dsplyPosts])
     ////////////////////////////////////////////////////////////////////////////
-    const getPosts = async (postRef, endpoint ) => {
+      const getPosts = async (postRef, endpoint ) => {
         setIsLoadingg(true);
          console.log("vvvvvvvvv")
         console.log(postRef.current)
@@ -65,7 +71,6 @@ function Ahome(prop){
         if (dataE.success) {
             postRef.current.data = dataE.posts;
             postRef.current.page.isnext = dataE.isnext
-             postRef.current.page.no = postRef.current.page.no +1
             postRef.current.check = false;
             console.log(dataE.posts)
             setDsplyPosts(dataE.posts);
@@ -121,7 +126,37 @@ function Ahome(prop){
         
 
     },[pagerefesh])
-    
+
+const handleSearch = async () => {
+    const type = searchTypeRef.current.value;
+    const value = searchInputRef.current.value;
+    if(!value || !type) {
+        alert("please enter value and select type");
+        return;
+    }
+    if(value === prop.search.current.value){
+        setActiveCategory("search");
+        setDsplyPosts(prop.search.current.data);
+        return;     
+    }
+
+    console.log(type, value,prop.search.current.page.no);
+    const jsend = {type : type , value : value , page : prop.search.current.page.no} 
+    const ans = await mthdAPI('protectedApi/search', 'POST', jsend, true)
+    if(ans.success){
+        setActiveCategory("search");
+        prop.search.current.data = ans.posts;
+        prop.search.current.page.isnext = ans.isnext
+        prop.search.current.value = value;
+        setDsplyPosts(ans.posts);
+        
+    }
+    else{
+        alert(ans.msg)
+    }
+
+  
+};
 
     ///////////////////////////////////////////////////
     if(!in_c_profile){ 
@@ -129,13 +164,30 @@ function Ahome(prop){
     }else{
     return(
         <div className="home_parent">
-            <div className="header">
-            <div className="search_bar">
-                <Search/>
-                <input type="text" placeholder=' Search' />
+                        <div className="header">
+                <div  className="search_bar">
+               
+
+                <select className="search_type" defaultValue="locality" ref={searchTypeRef}>
+                    <option value="district">District:</option>
+                    <option value="taluk">Taluk:</option>
+                    <option value="locality">Locality:</option>
+                </select>
+
+                <input
+                    type="text"
+                    placeholder="Search location..."
+                    ref={searchInputRef}
+                    
+                />
+                 <button  onClick={()=>handleSearch()}><Search className="search_icon"  /></button>
             </div>
-            <Bell/>
+            <div className="noti"  onClick={()=>{navi('Noti')}}>
+                 {prop.noti_length > 0 && <span>{prop.noti_length}</span>}
+            <Bell size={30}/>
             </div>
+            </div>
+            
             <div className="catogory">
                {categories.map((cat,indx) =>
                { 
@@ -153,6 +205,7 @@ function Ahome(prop){
                  
                
             </div>
+            
                
             <div className="home_content">
 
@@ -160,16 +213,31 @@ function Ahome(prop){
                  dsplyPosts?.map((item , indx)=>{
                     console.log("this is the :",item)
                     return(
-                        <Post_cards post_info= {item}  key={indx}></Post_cards>
+                        <Post_cards post_info= {item} user_info={prop.user_info}  arrRef={arrRef[activeCategory]} all_Cmnt ={prop.all_Cmnt} key={indx}
+                        savedpst={prop.savedpst} likedpst={prop.likedpst}></Post_cards>
                     )
                  })
 
                  }
-                 <button onClick={()=>{
+                 
+                {
+                arrRef[activeCategory].current.page.isnext &&
+                    <button onClick={()=>{
                     arrRef[activeCategory].current.check = true
+                    arrRef[activeCategory].current.page.no = arrRef[activeCategory].current.page.no +1
                     getPosts( arrRef[activeCategory], `protectedApi/${activeCategory}`)
 
                 }} >Next</button>
+                }
+                {
+                arrRef[activeCategory].current.page.no >1 &&
+                    <button onClick={()=>{
+                    arrRef[activeCategory].current.check = true
+                    arrRef[activeCategory].current.page.no = arrRef[activeCategory].current.page.no - 1
+                    getPosts( arrRef[activeCategory], `protectedApi/${activeCategory}`)
+
+                }} >Back</button>
+                }
             </div>
               {dsplyPosts.length === 0 && 
               <>
