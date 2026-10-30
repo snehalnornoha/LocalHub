@@ -54,6 +54,19 @@ function CreatePost(props) {
       pst_send.append(key , value)
     })
    console.log("sending to",API_URL)
+   console.log("A: Before fetch");
+
+fetch(`${API_URL}/`, {
+    method: "GET"
+})
+.then(res => {
+    console.log("B: Server responded:", res.status);
+})
+.catch(err => {
+    console.error("C: Connection failed:", err);
+});
+
+console.log("D: After starting fetch");
     const res = await fetch(
       `${API_URL}/protectedApi/post_upload`,
       {
