@@ -44,7 +44,7 @@ function CreatePost(props) {
   const hndl_crt = async(frmdata,img,user_img_url,is_refresh)=>{
     console.log(frmdata)
     try{
-    const cmprsd_img = await  await imageCompression(img, options);
+    const cmprsd_img =  await imageCompression(img, options);
     const pst_send = new FormData()
     pst_send.append("images",cmprsd_img );
     pst_send.append("user_img_url",user_img_url);
