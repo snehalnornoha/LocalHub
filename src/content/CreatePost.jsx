@@ -43,11 +43,13 @@ function CreatePost(props) {
 
   const hndl_crt = async(frmdata,img,user_img_url,is_refresh)=>{
     console.log(frmdata)
+    const uname = props.user_info.current.data.name || user
     try{
     const cmprsd_img =  await imageCompression(img, options);
     const pst_send = new FormData()
-    console.log("images is ok ")
+    console.log("images is ok MM")
     pst_send.append("images",cmprsd_img );
+    pst_send.append("name",uname );
     pst_send.append("user_img_url",user_img_url);
     Object.entries(frmdata).forEach(([key , value])=>{
       console.log(key,value)
