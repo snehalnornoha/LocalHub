@@ -3,7 +3,7 @@ import "./CreatePost.css";
 import imageCompression from "browser-image-compression";
 import { useForm } from "react-hook-form";
 const API_URL = import.meta.env.VITE_OTHER_SIDE_PATH;
-import { refresh_credentials} from '../controlers';
+import { mthdAPI, refresh_credentials} from '../controlers';
 import { useNavigate } from "react-router-dom";
 import { Loading } from "./ProfCard";
 
@@ -54,6 +54,8 @@ function CreatePost(props) {
       pst_send.append(key , value)
     })
    console.log("sending to",API_URL)
+   const data123 = await mthdAPI('/protectedApi/post_upload',"POST",{b : "ijnhh"},true)
+   console.log(data123)
    
     const res = await fetch(
       `${API_URL}/protectedApi/post_upload`,
